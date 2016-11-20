@@ -1,0 +1,381 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+        <style type="text/css">
+            *{
+                box-sizing: border-box;
+            }
+            html{
+                height: 100%;
+            }
+            body{
+                font-weight: 400;
+                margin: 0;
+                height: 100%;
+            }
+            a {
+                /* color: #337ab7; */
+                text-decoration: none;
+            }
+            .wrapper {
+                background-color: white;
+                min-height: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            .header{
+                position: relative;
+                min-height: 50px;
+                z-index: 1030;
+                background-color: #09C;
+            }
+            .header .logo{
+                color: #fff;
+                border-bottom: 0 solid transparent;
+
+                display: block;
+                float: left;
+                height: 50px;
+                font-size: 20px;
+                line-height: 50px;
+                text-align: center;
+                width: 230px;
+                padding: 0 15px;
+                font-weight: 300;
+                overflow: hidden;
+            }
+            .header .navbar{
+                margin-bottom: 0;
+                margin-left: 230px;
+                border: none;
+                min-height: 50px;
+                border-radius: 0;
+                position: relative;
+            }
+            .sidebar{
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding-top: 50px;
+                min-height: 100%;
+                width: 230px;
+                background-color: black;
+                overflow: hidden;
+            }
+            .sidebar-min {
+                width: 50px;
+            }
+            .sidebar .sidebar-menu{
+                position: absolute;
+                top: 50px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                overflow: auto;
+                max-width: 230px;
+                background-color: #293038;
+            }
+            .content{
+                /*position: absolute;
+                top: 0;
+                left: 0;
+                padding-top: 50px;*/
+                margin-left: 230px;
+                min-height: 100%;
+                background-color: white;/*#EAEDF1*/
+            }
+
+            .header .sidebar-toggle {
+                float: left;
+                background-color: transparent;
+                background-image: none;
+                padding: 15px 15px;
+                font-family: fontAwesome;
+                color: white;
+            }
+            .header .sidebar-toggle:before {
+                content: "\f0c9";
+            }
+            .header .navbar-custom-menu {
+                float: right;
+            }
+            .navbar-nav {
+                float: left;
+                margin: 0;
+            }
+            .navbar-custom-menu>.navbar-nav>li {
+                position: relative;
+            }
+            .nav>li {
+                display: block;
+            }
+            .navbar-nav>li>a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                line-height: 20px;
+            }
+            .nav>li>a {
+                position: relative;
+                display: block;
+                padding: 15px;
+            }
+            .navbar-custom-menu>.navbar-nav>li>.dropdown-menu {
+                position: absolute;
+                right: 0;
+                left: auto;
+            }
+            .navbar-nav>.user-menu>.dropdown-menu {
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+                padding: 1px 0 0 0;
+                border-top-width: 0;
+                width: 200px;
+            }
+            .dropdown-toggle {
+                font-size: 14px;
+                color: white;
+            }
+            .dropdown-toggle .pannel-toggle {
+                font-size: 10px;
+                padding-left: 10px;
+            }
+            .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1000;
+                /*display: none;*/
+                float: left;
+                min-width: 160px;
+                padding: 5px 0;
+                margin: 0;
+                font-size: 14px;
+                text-align: left;
+                list-style: none;
+                background-color: #fff;
+                -webkit-background-clip: padding-box;
+                background-clip: padding-box;
+                border: 1px solid #ccc;
+                border: 1px solid rgba(0,0,0,.15);
+                border-radius: 4px;
+                -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            }
+            .dropdown-menu .user-footer {
+                text-align: center;
+            }
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0,0,0,0);
+                border: 0;
+            }
+            .btn {
+                display: inline-block;
+                padding: 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+
+
+            /*
+            * Component: Sidebar Mini
+            */
+            @media (min-width: 768px) {
+            .sidebar-mini.sidebar-collapse .content-wrapper,
+            .sidebar-mini.sidebar-collapse .right-side,
+            .sidebar-mini.sidebar-collapse .main-footer {
+                margin-left: 50px !important;
+                z-index: 840;
+            }
+            .sidebar-mini.sidebar-collapse .main-sidebar {
+                -webkit-transform: translate(0, 0);
+                -ms-transform: translate(0, 0);
+                -o-transform: translate(0, 0);
+                transform: translate(0, 0);
+                width: 50px !important;
+                z-index: 850;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li {
+                position: relative;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > a {
+                margin-right: 0;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span {
+                border-top-right-radius: 4px;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:not(.treeview) > a > span {
+                border-bottom-right-radius: 4px;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-bottom-right-radius: 4px;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+                display: block !important;
+                position: absolute;
+                width: 180px;
+                left: 50px;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
+                top: 0;
+                margin-left: -3px;
+                padding: 12px 5px 12px 20px;
+                background-color: inherit;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container {
+                float: right;
+                width: auto!important;
+                left: 200px!important;
+                top: 10px!important;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container > .label:not(:first-of-type) {
+                display: none;
+            }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+                top: 44px;
+                margin-left: 0;
+            }
+            .sidebar-mini.sidebar-collapse .main-sidebar .user-panel > .info,
+            .sidebar-mini.sidebar-collapse .sidebar-form,
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span,
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu,
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > .pull-right,
+            .sidebar-mini.sidebar-collapse .sidebar-menu li.header {
+                display: none !important;
+                -webkit-transform: translateZ(0);
+            }
+            .sidebar-mini.sidebar-collapse .main-header .logo {
+                width: 50px;
+            }
+            .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
+                display: block;
+                margin-left: -15px;
+                margin-right: -15px;
+                font-size: 18px;
+            }
+            .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
+                display: none;
+            }
+            .sidebar-mini.sidebar-collapse .main-header .navbar {
+                margin-left: 50px;
+            }
+            }
+            .sidebar-menu,
+            .main-sidebar .user-panel,
+            .sidebar-menu > li.header {
+            white-space: nowrap;
+            overflow: hidden;
+            }
+            /*.sidebar-menu:hover {
+            overflow: visible;
+            }*/
+            .sidebar-form,
+            .sidebar-menu > li.header {
+            overflow: hidden;
+            text-overflow: clip;
+            }
+            .sidebar-menu li > a {
+            position: relative;
+            }
+            .sidebar-menu li > a > .pull-right-container {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            margin-top: -7px;
+            }            
+        </style>
+        <!-- 先引入 Vue -->
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <!-- 引入组件库 -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </head>
+    <body class="sidebar-mini">
+        <div class="wrapper">
+            <header class="header">
+                <a href="javascript:void(0)" class="logo">Admin</a>
+                <nav class="navbar">
+                    <a href="javascript:void(0)" class="sidebar-toggle" v-on:click="isSidebarMin = !isSidebarMin"><span class="sr-only">Toggle navigation</span></a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="javascript:void(0)" class="dropdown-toggle" v-on:click="userControlPanel = !userControlPanel">
+                                    <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+                                    <span class="hidden-xs">Alexander Pierce</span><i :class="['pannel-toggle', userControlPanel ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
+                                </a>
+                                <ul class="dropdown-menu" v-if="userControlPanel">
+                                    <li class="user-footer">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <aside class="sidebar" :class="{ 'sidebar-min': isSidebarMin }">
+                <div class="sidebar-menu">
+                    <el-menu class="el-menu-vertical-demo" default-openeds={[1]} @open="handleOpen" @close="handleClose" theme="dark">
+                        <el-submenu index="1">
+                            <template slot="title"><i class="el-icon-message"></i>导航一</template>
+                            <el-menu-item index="1-1">选项1</el-menu-item>
+                            <el-menu-item index="1-2">选项2</el-menu-item>
+                            <el-menu-item index="1-3">选项3</el-menu-item>
+                        </el-submenu>
+                        <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
+                        <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
+                    </el-menu>
+                </div>
+            </aside>
+            <div class="content">
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: '.wrapper',
+            data: {
+                isSidebarMin: false,
+                userControlPanel: false
+            },
+            methods: {
+                handleOpen(key, keyPath) {
+                    console.log(key, keyPath);
+                },
+                handleClose(key, keyPath) {
+                    console.log(key, keyPath);
+                }
+            }
+        });
+    </script>
+</html>
